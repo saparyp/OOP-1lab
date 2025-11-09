@@ -48,60 +48,8 @@ unsigned char Array::getAt(size_t index) const {
     return data_[index];
 }
 
-Array Array::add(const Array& other) const {
-    if (size_ != other.size_) {
-        throw std::invalid_argument("Arrays must have the same size for addition");
-    }
-
-    Array result(size_);
-    for (size_t i = 0; i < size_; ++i) {
-        result.data_[i] = data_[i] + other.data_[i];
-    }
-    return result;
-}
-
-Array Array::subtract(const Array& other) const {
-    if (size_ != other.size_) {
-        throw std::invalid_argument("Arrays must have the same size for subtraction");
-    }
-
-    Array result(size_);
-    for (size_t i = 0; i < size_; ++i) {
-        if (other.data_[i] > data_[i]) {
-            throw std::invalid_argument("Subtraction would result in negative value");
-        }
-        result.data_[i] = data_[i] - other.data_[i];
-    }
-    return result;
-}
-
 Array Array::copy() const {
     return Array(*this);
-}
-
-Array& Array::addAndAssign(const Array& other) {
-    if (size_ != other.size_) {
-        throw std::invalid_argument("Arrays must have the same size for addition");
-    }
-
-    for (size_t i = 0; i < size_; ++i) {
-        data_[i] += other.data_[i];
-    }
-    return *this;
-}
-
-Array& Array::subtractAndAssign(const Array& other) {
-    if (size_ != other.size_) {
-        throw std::invalid_argument("Arrays must have the same size for subtraction");
-    }
-
-    for (size_t i = 0; i < size_; ++i) {
-        if (other.data_[i] > data_[i]) {
-            throw std::invalid_argument("Subtraction would result in negative value");
-        }
-        data_[i] -= other.data_[i];
-    }
-    return *this;
 }
 
 bool Array::greaterThan(const Array& other) const {
